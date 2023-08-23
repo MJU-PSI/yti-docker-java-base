@@ -14,7 +14,8 @@ RUN set -x \
     && apk add --no-cache bash \
     && apk add --no-cache fontconfig \
     && apk add --no-cache ttf-dejavu \
-    && apk add --no-cache gettext
+    && apk add --no-cache gettext \
+    && apk add --no-cache ca-certificates
 
 # Add scripts
 ADD scripts/bootstrap.sh /
