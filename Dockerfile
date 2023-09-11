@@ -20,6 +20,7 @@ RUN set -x \
 
 # Add scripts
 ADD scripts/bootstrap.sh /
+RUN chmod +x /bootstrap.sh
 
 # Create directories
 RUN mkdir -p ${log_dir} \
