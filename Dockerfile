@@ -12,6 +12,7 @@ ENV deploy_dir ${home_dir}/deploy
 # Install common tools
 RUN set -x \
     && apk update && apk upgrade \
+    && apk add --no-cache wget \
     && apk add --no-cache bash \
     && apk add --no-cache fontconfig \
     && apk add --no-cache ttf-dejavu \
@@ -28,8 +29,8 @@ RUN mkdir -p ${log_dir} \
     && mkdir -p ${deploy_dir}
 
 # Download the certificate and place it in the trusted certificate directory
-RUN wget -O /usr/local/share/ca-certificates/sigov-ca2.xcert.pem https://www.si-trust.gov.si/assets/si-trust-root/povezovalni-podrejeni/sigovca-2/sigov-ca2.xcert.pem
-RUN wget -O /usr/local/share/ca-certificates/si-trust-root.pem https://www.si-trust.gov.si/assets/si-trust-root/korensko-potrdilo/si-trust-root.pem
+RUN wget --no-check-certificate -O /usr/local/share/ca-certificates/sigov-ca2.xcert.pem https://www.si-trust.gov.si/assets/si-trust-root/povezovalni-podrejeni/sigovca-2/sigov-ca2.xcert.pem
+RUN wget --no-check-certificate -O /usr/local/share/ca-certificates/si-trust-root.pem https://www.si-trust.gov.si/assets/si-trust-root/korensko-potrdilo/si-trust-root.pem
 
 # Update the certificate store
 RUN update-ca-certificates
